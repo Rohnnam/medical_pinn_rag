@@ -14,16 +14,22 @@ from langchain_community.llms import Ollama
 from langchain.chains import RetrievalQA
 import os
 import pickle
+import re
 
 # === Configuration ===
 ENTREZ_EMAIL = "rohannambiar370@gmail.com"
-ENTREZ_API_KEY = "d7d72d403bc1a992b88d7c8befe734858708"  # 🔑 Replace with your own Entrez API key
+ENTREZ_API_KEY = "d7d72d403bc1a992b88d7c8befe734858708"  # Replace with your own Entrez API key
 Entrez.email = ENTREZ_EMAIL
 Entrez.api_key = ENTREZ_API_KEY
 
 CONDITION = "frontal lobe edema"
-INDEX_PATH = "faiss_index_edema"
-CACHE_PATH = "cached_articles_edema.pkl"
+
+def slugify(text):
+    return re.sub(r'\W+', '_', text.lower()).strip('_')
+
+slug = slugify(CONDITION)
+INDEX_PATH = f"faiss_index_{slug}"
+CACHE_PATH = f"cached_articles_{slug}.pkl"
 
 # === 1. Dynamic Query Generation via LLM ===
 query_prompt = PromptTemplate.from_template("""
@@ -65,7 +71,7 @@ def fetch_pubmed_articles(queries, max_results_per_query=30):
                         articles.append(text)
                 except Exception:
                     continue
-                sleep(0.3)  # NCBI rate limit with API key is better (10/sec)
+                sleep(0.3)  # With API key: 10 req/sec
         except Exception:
             continue
     return list(set(articles))  # Deduplicate
