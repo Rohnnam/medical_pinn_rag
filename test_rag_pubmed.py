@@ -9,8 +9,8 @@ from langchain.chains import LLMChain
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import Ollama
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 import os
 import pickle
@@ -22,7 +22,7 @@ ENTREZ_API_KEY = "d7d72d403bc1a992b88d7c8befe734858708"  # Replace with your own
 Entrez.email = ENTREZ_EMAIL
 Entrez.api_key = ENTREZ_API_KEY
 
-CONDITION = "frontal lobe edema"
+CONDITION = "central pontine myelinolysis"
 
 def slugify(text):
     return re.sub(r'\W+', '_', text.lower()).strip('_')
@@ -40,7 +40,7 @@ Generate 3 diverse PubMed search queries relevant to its treatment, pathology, a
 Return each query as a new line.
 """)
 
-llm_for_prompt = Ollama(model="mistral")
+llm_for_prompt = OllamaLLM(model="mistral")
 generate_queries_chain = LLMChain(prompt=query_prompt, llm=llm_for_prompt)
 
 print("\n📡 Generating PubMed search queries...")
@@ -107,12 +107,12 @@ else:
 
 # === 5. RAG Setup ===
 print("🤖 Launching RAG pipeline...")
-llm = Ollama(model="mistral")  # Uses GPU if Ollama is running on GPU backend
+llm = OllamaLLM(model="mistral")  # Uses GPU if Ollama is running on GPU backend
 retriever = vector_store.as_retriever(search_kwargs={"k": 10})
 qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
 
-query = "What are the imaging features, treatment considerations, and mass effects associated with frontal lobe edema?"
-docs = retriever.get_relevant_documents(query)
+query = "What are the imaging features, treatment considerations, and mass effects associated with central pontine myelinolysis?"
+docs = retriever.invoke(query)
 
 print("\n===== Retrieved Documents =====")
 for i, doc in enumerate(docs, 1):
