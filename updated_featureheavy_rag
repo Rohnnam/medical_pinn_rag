@@ -53,17 +53,18 @@ class BiomedicalRAGSystem:
         
         # Query generation prompt
         self.query_prompt = PromptTemplate.from_template("""
-Generate clean PubMed search queries for this medical condition. Extract key terms and create focused queries.
+You are a biomedical research assistant generating optimal PubMed search queries from clinical cases or model outputs.
 
-Condition: {condition}
+Instructions:
+- Extract relevant keywords from the case.
+- Convert numeric values to qualitative descriptors (e.g., "4.6 cm³" → "large lesion", "7.2 mmHg" → "elevated intracranial pressure").
+- Avoid overly specific filters or numerical constraints.
+- Each query should target one of: pathophysiology, imaging, treatment.
 
-Generate exactly 4 search queries as clean terms only:
-- Query 1: Focus on pontine lesions pathophysiology
-- Query 2: Focus on brainstem lesions imaging
-- Query 3: Focus on intracranial pressure management  
-- Query 4: Focus on pontine mass treatment
+Input:
+{condition}
 
-Return only clean search terms, one per line, no numbering or explanations:
+Return only the queries, one per line, with no explanation.
 """)
         
         # RAG analysis prompt
