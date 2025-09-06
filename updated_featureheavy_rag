@@ -418,8 +418,8 @@ Analysis:
 if __name__ == "__main__":
     # Initialize system
     rag_system = BiomedicalRAGSystem(
-        email="rohannambiar370@gmail.com",
-        api_key="d7d72d403bc1a992b88d7c8befe734858708",
+        email="",
+        api_key="",
         model_name="mistral"
     )
     
