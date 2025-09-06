@@ -9,7 +9,7 @@ It unifies **tumor classification, segmentation, growth modeling, and biomedical
 ## Key Components
 - **Tumor Classification**
   - Trained on **Figshare Brain Tumor Dataset** (meningioma, glioma, pituitary).
-  - Achieved ~80% accuracy (DenseNet121).
+  - Achieved ~96% accuracy (DenseNet121).
 
 - **3D Tumor Segmentation**
   - Trained on **BraTS2020 dataset** with 3D UNet.
@@ -46,7 +46,7 @@ Training progress for classifier, segmentation, and PINN components.
 End-to-end system outputs combining classification, segmentation, PINN growth fields, and anatomical atlas localization.
 
 ![Predictions & Overlays](Predictions_&_Overlays3.png)  
-*Example outputs: classifier, GT mask, 3D segmentation prediction, PINN fields.*
+* outputs: classifier, GT mask, 3D segmentation prediction, PINN fields.*
 
 ![Atlas Preview](preview.webp)  
 *Anatomical localization overlay showing tumor region and functional impact.*
