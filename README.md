@@ -31,6 +31,28 @@ It unifies **tumor classification, segmentation, growth modeling, and biomedical
 
 ---
 
+## Learning Performance
+Training progress for classifier, segmentation, and PINN components.
+
+![Learning Curves](Learning_Curves.png)  
+*Classifier accuracy/loss and segmentation Dice/loss.*
+
+![PINN Training](Learning_Curves3.png)  
+*PINN losses and parameter evolution (diffusion, growth).*
+
+---
+
+## Model Predictions & Visualizations
+End-to-end system outputs combining classification, segmentation, PINN growth fields, and anatomical atlas localization.
+
+![Predictions & Overlays](Predictions_&_Overlays3.png)  
+*Example outputs: classifier, GT mask, 3D segmentation prediction, PINN fields.*
+
+![Atlas Preview](preview.webp)  
+*Anatomical localization overlay showing tumor region and functional impact.*
+
+---
+
 ## Project Highlights
 - First-principles + data-driven fusion: **Deep Learning + Physics + Medical Literature**.
 - Automated tumor reports containing:
@@ -50,11 +72,11 @@ It unifies **tumor classification, segmentation, growth modeling, and biomedical
 ---
 
 ## Tech Stack
-- **Deep Learning**: PyTorch, MONAI
-- **Physics Modeling**: PINN (custom PDE-constrained training)
-- **Retrieval & NLP**: LangChain, HuggingFace, Ollama (Mistral)
-- **Vector DB**: FAISS
-- **Visualization**: Matplotlib
+- **Deep Learning**: PyTorch, MONAI  
+- **Physics Modeling**: PINN (custom PDE-constrained training)  
+- **Retrieval & NLP**: LangChain, HuggingFace, Ollama (Mistral)  
+- **Vector DB**: FAISS  
+- **Visualization**: Matplotlib  
 
 ---
 
@@ -66,5 +88,5 @@ It unifies **tumor classification, segmentation, growth modeling, and biomedical
 ---
 
 ## Author
-Developed by **Rohan Nambiar and Samaikya Reddy** (2025).  
+Developed by **Rohan Nambiar and P.R.N Samaikya Reddy** (2025).  
 Focus: AI for medical imaging, physics-informed learning, and clinical decision support.
